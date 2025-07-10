@@ -9,6 +9,8 @@ export default defineConfig({
   clean: true,
   minify: true,
   format: ['cjs', 'esm'],
+  // 👇 Agrega este exclude
+  exclude: ['**/*.d.ts'],
   onSuccess: async () => {
     cpSync('src/utils/translations', 'dist/translations', { recursive: true });
   },
@@ -16,7 +18,6 @@ export default defineConfig({
     '.json': 'file',
     '.yml': 'file',
   },
-  // 👇 Esta parte fuerza el uso de esbuild y evita problemas con swc
   esbuildOptions(options) {
     options.platform = 'node';
     return options;
