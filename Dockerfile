@@ -27,7 +27,7 @@ RUN chmod +x ./Docker/scripts/* && dos2unix ./Docker/scripts/*
 
 RUN ./Docker/scripts/generate_database.sh
 
-RUN npm run build
+RUN npm run build || (cat /evolution/tsup.config.ts && echo "❌ Falló el build. Revisa el archivo tsup.config.ts o agrega @swc/core si usas emitDecoratorMetadata." && exit 1)
 
 FROM node:20-alpine AS final
 
