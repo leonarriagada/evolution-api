@@ -27,7 +27,8 @@ RUN chmod +x ./Docker/scripts/* && dos2unix ./Docker/scripts/*
 
 RUN ./Docker/scripts/generate_database.sh
 
-RUN npm install --save-dev @swc/core
+RUN npm install --save-dev @swc/core --legacy-peer-deps
+
 
 RUN npm run build || (cat /evolution/tsup.config.ts && echo "❌ Falló el build. Revisa el archivo tsup.config.ts o agrega @swc/core si usas emitDecoratorMetadata." && exit 1)
 
