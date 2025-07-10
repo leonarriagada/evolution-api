@@ -1,5 +1,4 @@
 import { cpSync } from 'node:fs';
-
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
@@ -16,5 +15,10 @@ export default defineConfig({
   loader: {
     '.json': 'file',
     '.yml': 'file',
+  },
+  // 👇 Esta parte fuerza el uso de esbuild y evita problemas con swc
+  esbuildOptions(options) {
+    options.platform = 'node';
+    return options;
   },
 });
